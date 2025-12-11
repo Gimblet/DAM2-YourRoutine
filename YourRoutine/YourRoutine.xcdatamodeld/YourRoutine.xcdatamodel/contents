@@ -1,4 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="false" userDefinedModelVersionIdentifier="">
-    <elements/>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="23605" systemVersion="23H626" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="EtiquetaEntity" representedClassName="EtiquetaEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="nombre" optional="YES" attributeType="String"/>
+        <relationship name="rutina" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="RutinaEntity" inverseName="etiqueta" inverseEntity="RutinaEntity"/>
+    </entity>
+    <entity name="PomodoroEntity" representedClassName="PomodoroEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="estaCorriendo" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="horaFin" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="horaInicio" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+    </entity>
+    <entity name="RutinaEntity" representedClassName="RutinaEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="descripcion" optional="YES" attributeType="String"/>
+        <attribute name="dia" optional="YES" attributeType="String"/>
+        <attribute name="fin" optional="YES" attributeType="String"/>
+        <attribute name="inicio" optional="YES" attributeType="String"/>
+        <attribute name="nombre" optional="YES" attributeType="String"/>
+        <relationship name="etiqueta" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="EtiquetaEntity" inverseName="rutina" inverseEntity="EtiquetaEntity"/>
+    </entity>
 </model>
