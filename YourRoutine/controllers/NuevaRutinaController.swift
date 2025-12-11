@@ -7,7 +7,10 @@
 
 import UIKit
 
-class NuevaRutinaController: UIViewController {
+class NuevaRutinaController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    @IBOutlet weak var cvEtiquetas: UICollectionView!
+    var listaEtiquetas:[EtiquetaModel] = []
+    
     @IBOutlet weak var txtTitulo: UITextField!
     @IBOutlet weak var txtvDescripcion: UITextView!
     
@@ -17,6 +20,10 @@ class NuevaRutinaController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        iniciarViewCollection()
+        listado()
+        cvEtiquetas.dataSource = self
+        cvEtiquetas.delegate = self
     }
     
     @IBAction func btnConfirmar(_ sender: UIButton) {
@@ -35,6 +42,31 @@ class NuevaRutinaController: UIViewController {
         else {
             ventana(msj: "Error al intentar registrar Rutina")
         }
+    }
+    
+    func iniciarViewCollection() {
+        cvEtiquetas.setContentHuggingPriority(.required, for: .horizontal)
+        cvEtiquetas.setContentCompressionResistancePriority(.required, for: .horizontal)
+    }
+    
+    func listado() {
+        listaEtiquetas.append(EtiquetaModel(nombre: "Programacion"))
+        listaEtiquetas.append(EtiquetaModel(nombre: "Estudiar"))
+        listaEtiquetas.append(EtiquetaModel(nombre: "Trabajo"))
+        listaEtiquetas.append(EtiquetaModel(nombre: "Relajo"))
+        listaEtiquetas.append(EtiquetaModel(nombre: "Meditar"))
+        listaEtiquetas.append(EtiquetaModel(nombre: "Ejercicio"))
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        listaEtiquetas.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        //crear objeto de la clase LibroCell
+        let fila = cvEtiquetas.dequeueReusableCell(withReuseIdentifier: "etiquetasIdentifier", for: indexPath) as! EtiquetaCell
+        fila.btnEtiqueta.setTitle(listaEtiquetas[indexPath.row].nombre, for: .normal)
+        return fila
     }
     
     @IBAction func btnRegresar(_ sender: UIButton) {
