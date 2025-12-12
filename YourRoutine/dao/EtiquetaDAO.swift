@@ -8,20 +8,12 @@
 import UIKit
 
 class EtiquetaDAO: IEtiquetaMetodos {
-    func save(bean: EtiquetaEntityModel) -> Int {
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    
+    func save(bean: EtiquetaEntity) -> Int {
         var salida = -1
-        //PASO 1: crear objeto de la clase AppDelegate
-        let delegate = UIApplication.shared.delegate as! AppDelegate
-        //PASO 2: acceder a la conexion con la base de datos "YourRoutine"
-        let bd = delegate.persistentContainer.viewContext
-        //PASO 3: crear objeto de la entidad "RutinaEntity"
-        let tabla = RutinaEntity(context: bd)
-        //PASO 4: asignar valor a los atributos del objeto tabla con los
-        tabla.nombre = bean.nombre
-        //PASO 5: controlar exception
         do{
-            //PASO 6: GRABAR
-            try bd.save()
+            try context.save()
             salida=1
         }
         catch let x as NSError{

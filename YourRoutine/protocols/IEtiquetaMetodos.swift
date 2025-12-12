@@ -8,6 +8,6 @@
 import UIKit
 
 protocol IEtiquetaMetodos {
-    func save(bean:EtiquetaEntityModel) -> Int
+    func save(bean:EtiquetaEntity) -> Int
     func findAll() -> [EtiquetaEntity]
 }

@@ -31,6 +31,10 @@ class NuevaRutinaController: UIViewController,
         cvEtiquetas.delegate = self
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        listadoEtiquetas()
+    }
+    
     @IBAction func btnConfirmar(_ sender: UIButton) {
         let rutina = iniciarRutina()
         let etiqueta = iniciarEtiquetas(rutina: rutina)
@@ -75,18 +79,13 @@ class NuevaRutinaController: UIViewController,
     }
     
     func listadoEtiquetas() {
-        let temp = EtiquetaDAO().findAll()
+        listaEtiquetas.removeAll()
         
-        for e in temp {
+        let etiquetas = EtiquetaDAO().findAll()
+        
+        for e in etiquetas {
             listaEtiquetas.append(EtiquetaEntityModel(nombre: e.nombre))
         }
-        
-//        listaEtiquetas.append(EtiquetaEntityModel(nombre: "Programacion"))
-//        listaEtiquetas.append(EtiquetaEntityModel(nombre: "Estudiar"))
-//        listaEtiquetas.append(EtiquetaEntityModel(nombre: "Trabajo"))
-//        listaEtiquetas.append(EtiquetaEntityModel(nombre: "Relajo"))
-//        listaEtiquetas.append(EtiquetaEntityModel(nombre: "Meditar"))
-//        listaEtiquetas.append(EtiquetaEntityModel(nombre: "Ejercicio"))
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -102,6 +101,18 @@ class NuevaRutinaController: UIViewController,
     @IBAction func btnRegresar(_ sender: UIButton) {
         EtiquetaDAO().clearTemporal()
         dismiss(animated: true)
+    }
+    
+    @IBAction func btnNuevaEtiqueta(_ sender: UIButton) {
+        performSegue(withIdentifier: "nuevaEtiquetaIdentifier", sender: nil)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "nuevaEtiquetaIdentifier" {
+            if let obj = segue.destination as? EtiquetaController {
+                obj.rutina = self
+            }
+        }
     }
     
     func ventana(msj:String) {
