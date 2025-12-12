@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="23605" systemVersion="23H626" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="23605" systemVersion="23H626" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithSwiftData="YES" userDefinedModelVersionIdentifier="">
     <entity name="EtiquetaEntity" representedClassName="EtiquetaEntity" syncable="YES" codeGenerationType="class">
         <attribute name="nombre" optional="YES" attributeType="String"/>
         <relationship name="rutina" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="RutinaEntity" inverseName="etiqueta" inverseEntity="RutinaEntity"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="nombre"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
     </entity>
     <entity name="PomodoroEntity" representedClassName="PomodoroEntity" syncable="YES" codeGenerationType="class">
         <attribute name="estaCorriendo" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>

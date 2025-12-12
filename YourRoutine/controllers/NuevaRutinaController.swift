@@ -7,9 +7,14 @@
 
 import UIKit
 
-class NuevaRutinaController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+class NuevaRutinaController: UIViewController,
+                             UICollectionViewDataSource,
+                             UICollectionViewDelegateFlowLayout {
+    
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    
     @IBOutlet weak var cvEtiquetas: UICollectionView!
-    var listaEtiquetas:[EtiquetaModel] = []
+    var listaEtiquetas:[EtiquetaEntityModel] = []
     
     @IBOutlet weak var txtTitulo: UITextField!
     @IBOutlet weak var txtvDescripcion: UITextView!
@@ -21,22 +26,21 @@ class NuevaRutinaController: UIViewController, UICollectionViewDataSource, UICol
     override func viewDidLoad() {
         super.viewDidLoad()
         iniciarViewCollection()
-        listado()
+        listadoEtiquetas()
         cvEtiquetas.dataSource = self
         cvEtiquetas.delegate = self
     }
     
     @IBAction func btnConfirmar(_ sender: UIButton) {
-        let titulo = txtTitulo.text ?? ""
-        let descripcion = txtvDescripcion.text ?? ""
-        let horaInicio = txtInicio.text ?? ""
-        let horaFin = txtFin.text ?? ""
-        // variable de la estructura inversores
-        let obj = RutinaModel(descripcion: descripcion, dia: "Lunes, Martes, Miercoles", fin: horaFin, inicio: horaInicio, nombre: titulo)
-        // invocar a la funcion save que se encuentra en la clase InversoresDAO
-        let estado = RutinaDAO().save(bean: obj)
+        let rutina = iniciarRutina()
+        let etiqueta = iniciarEtiquetas(rutina: rutina)
+        
+        let estado = RutinaDAO().save(bean: rutina, etiqueta: etiqueta)
+        
+        EtiquetaDAO().clearTemporal()
+        
         // validar estado
-        if estado > 0 {
+        if (estado == 1) {
             ventana(msj: "Rutina registrada con Exito")
         }
         else {
@@ -44,18 +48,45 @@ class NuevaRutinaController: UIViewController, UICollectionViewDataSource, UICol
         }
     }
     
+    func iniciarRutina() -> RutinaEntity {
+        let rutina = RutinaEntity(context: context)
+        rutina.nombre = txtTitulo.text ?? ""
+        rutina.descripcion = txtvDescripcion.text ?? ""
+        rutina.dia = "lunes, martes"
+        rutina.inicio = txtInicio.text ?? ""
+        rutina.fin = txtFin.text ?? ""
+        return rutina
+    }
+    
+    func iniciarEtiquetas(rutina: RutinaEntity) -> EtiquetaEntity {
+        let etiqueta = EtiquetaEntity(context: context)
+        
+        for e in EtiquetaDAO().getEtiquetaTemporal() {
+            etiqueta.nombre = e
+            etiqueta.rutina = rutina
+        }
+        
+        return etiqueta
+    }
+    
     func iniciarViewCollection() {
         cvEtiquetas.setContentHuggingPriority(.required, for: .horizontal)
         cvEtiquetas.setContentCompressionResistancePriority(.required, for: .horizontal)
     }
     
-    func listado() {
-        listaEtiquetas.append(EtiquetaModel(nombre: "Programacion"))
-        listaEtiquetas.append(EtiquetaModel(nombre: "Estudiar"))
-        listaEtiquetas.append(EtiquetaModel(nombre: "Trabajo"))
-        listaEtiquetas.append(EtiquetaModel(nombre: "Relajo"))
-        listaEtiquetas.append(EtiquetaModel(nombre: "Meditar"))
-        listaEtiquetas.append(EtiquetaModel(nombre: "Ejercicio"))
+    func listadoEtiquetas() {
+        let temp = EtiquetaDAO().findAll()
+        
+        for e in temp {
+            listaEtiquetas.append(EtiquetaEntityModel(nombre: e.nombre))
+        }
+        
+//        listaEtiquetas.append(EtiquetaEntityModel(nombre: "Programacion"))
+//        listaEtiquetas.append(EtiquetaEntityModel(nombre: "Estudiar"))
+//        listaEtiquetas.append(EtiquetaEntityModel(nombre: "Trabajo"))
+//        listaEtiquetas.append(EtiquetaEntityModel(nombre: "Relajo"))
+//        listaEtiquetas.append(EtiquetaEntityModel(nombre: "Meditar"))
+//        listaEtiquetas.append(EtiquetaEntityModel(nombre: "Ejercicio"))
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -63,13 +94,13 @@ class NuevaRutinaController: UIViewController, UICollectionViewDataSource, UICol
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        //crear objeto de la clase LibroCell
         let fila = cvEtiquetas.dequeueReusableCell(withReuseIdentifier: "etiquetasIdentifier", for: indexPath) as! EtiquetaCell
         fila.btnEtiqueta.setTitle(listaEtiquetas[indexPath.row].nombre, for: .normal)
         return fila
     }
     
     @IBAction func btnRegresar(_ sender: UIButton) {
+        EtiquetaDAO().clearTemporal()
         dismiss(animated: true)
     }
     
