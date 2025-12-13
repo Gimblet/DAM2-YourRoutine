@@ -16,6 +16,9 @@ class NuevaRutinaController: UIViewController,
     @IBOutlet weak var cvEtiquetas: UICollectionView!
     var listaEtiquetas:[EtiquetaEntityModel] = []
     
+    @IBOutlet weak var cvDias: UICollectionView!
+    var listaDias:[String] = []
+    
     @IBOutlet weak var txtTitulo: UITextField!
     @IBOutlet weak var txtvDescripcion: UITextView!
     
@@ -26,7 +29,14 @@ class NuevaRutinaController: UIViewController,
     override func viewDidLoad() {
         super.viewDidLoad()
         iniciarViewCollection()
+        listadoDias()
         listadoEtiquetas()
+        
+        // Lista para los dias
+        cvDias.dataSource = self
+        cvDias.delegate = self
+        
+        // Lista para las Etiquetas
         cvEtiquetas.dataSource = self
         cvEtiquetas.delegate = self
     }
@@ -74,6 +84,9 @@ class NuevaRutinaController: UIViewController,
     }
     
     func iniciarViewCollection() {
+        cvDias.setContentHuggingPriority(.required, for: .horizontal)
+        cvDias.setContentCompressionResistancePriority(.required, for: .horizontal)
+        
         cvEtiquetas.setContentHuggingPriority(.required, for: .horizontal)
         cvEtiquetas.setContentCompressionResistancePriority(.required, for: .horizontal)
     }
@@ -88,14 +101,37 @@ class NuevaRutinaController: UIViewController,
         }
     }
     
+    func listadoDias() {
+        listaDias.removeAll()
+        
+        listaDias.append("Lunes")
+        listaDias.append("Martes")
+        listaDias.append("Miercoles")
+        listaDias.append("Jueves")
+        listaDias.append("Viernes")
+        listaDias.append("Sabado")
+        listaDias.append("Domingo")
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        listaEtiquetas.count
+        if (collectionView == self.cvDias) {
+            return listaDias.count
+        } else {
+            return listaEtiquetas.count
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let fila = cvEtiquetas.dequeueReusableCell(withReuseIdentifier: "etiquetasIdentifier", for: indexPath) as! EtiquetaCell
-        fila.btnEtiqueta.setTitle(listaEtiquetas[indexPath.row].nombre, for: .normal)
-        return fila
+        if(collectionView == self.cvDias) {
+            let fila = cvDias.dequeueReusableCell(withReuseIdentifier: "diasIdentifier", for: indexPath) as! DiaCell
+            fila.btnDia.setTitle(listaDias[indexPath.row], for: .normal)
+            return fila
+        }
+        else  {
+            let fila = cvEtiquetas.dequeueReusableCell(withReuseIdentifier: "etiquetasIdentifier", for: indexPath) as! EtiquetaCell
+            fila.btnEtiqueta.setTitle(listaEtiquetas[indexPath.row].nombre, for: .normal)
+            return fila
+        }
     }
     
     @IBAction func btnRegresar(_ sender: UIButton) {
