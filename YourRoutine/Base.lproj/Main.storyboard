@@ -665,7 +665,7 @@
                         <viewLayoutGuide key="safeArea" id="Q0E-NK-y2g"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Pomodoro" image="fitness.timer.fill" catalog="system" id="D3G-pi-YPD"/>
+                    <tabBarItem key="tabBarItem" title="Pomodoro" image="gauge.with.needle.fill" catalog="system" id="D3G-pi-YPD"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mD4-J9-brh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -776,7 +776,7 @@
     </scenes>
     <resources>
         <image name="alarm.waves.left.and.right.fill" catalog="system" width="128" height="75"/>
-        <image name="fitness.timer.fill" catalog="system" width="128" height="123"/>
+        <image name="gauge.with.needle.fill" catalog="system" width="128" height="123"/>
         <image name="house.fill" catalog="system" width="128" height="104"/>
         <image name="lightbulb.min.fill" catalog="system" width="115" height="128"/>
         <image name="square.and.arrow.up" catalog="system" width="110" height="128"/>

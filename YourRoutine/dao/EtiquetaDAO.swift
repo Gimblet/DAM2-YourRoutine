@@ -58,7 +58,11 @@ class EtiquetaDAO: IEtiquetaMetodos {
     }
     
     func getEtiquetaTemporal() -> [String] {
-        return UserDefaults.standard.value(forKey: "etiquetas") as! [String]
+        let previousData = UserDefaults.standard.value(forKey: "etiquetas") as? [String]
+        if (previousData != nil) {
+            return previousData.unsafelyUnwrapped
+        }
+        return []
     }
     
     func removeEtiquetaTemporal(etiqueta:String) {
