@@ -32,16 +32,16 @@ class RutinaController: UIViewController,
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let fila = tablaRutinas.dequeueReusableCell(withIdentifier: "filaRutina") as! RutinaCell
+        let frecuencia = lista[indexPath.row].dia?.components(separatedBy: ",").count
         //acceder a los label's
         fila.lblTitRutina.text=lista[indexPath.row].nombre
-//        fila.lblEtiqueta.text=lista[indexPath.row].etiqueta?.description
-//        fila.lblFrecuencia.text = lista[indexPath.row].dia
+        fila.lblEtiqueta.text=lista[indexPath.row].etiqueta?.description
+        fila.lblFrecuencia.text = String("\(frecuencia ?? 0)" + "x por semana")
         fila.lblTiempo.text = lista[indexPath.row].inicio
         fila.lblDiasSem.text = lista[indexPath.row].dia
         
         // Placeholders
         fila.lblEtiqueta.text = "Programacion"
-        fila.lblFrecuencia.text = "Lunes,Martes,Miercoles..."
         return fila
     }
     

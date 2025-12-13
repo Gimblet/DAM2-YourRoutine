@@ -43,6 +43,7 @@ class NuevaRutinaController: UIViewController,
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        listadoDias()
         listadoEtiquetas()
     }
     
@@ -52,6 +53,7 @@ class NuevaRutinaController: UIViewController,
         
         let estado = RutinaDAO().save(bean: rutina, etiqueta: etiqueta)
         
+        RutinaDAO().clearTemporal()
         EtiquetaDAO().clearTemporal()
         
         // validar estado
@@ -67,10 +69,14 @@ class NuevaRutinaController: UIViewController,
         let rutina = RutinaEntity(context: context)
         rutina.nombre = txtTitulo.text ?? ""
         rutina.descripcion = txtDescripcion.text ?? ""
-        rutina.dia = "lunes, martes"
+        rutina.dia = parsearDiasSelecionados()
         rutina.inicio = txtInicio.text ?? ""
         rutina.fin = txtFin.text ?? ""
         return rutina
+    }
+    
+    func parsearDiasSelecionados() -> String {
+        return RutinaDAO().getDiaTemporal().joined(separator: ",")
     }
     
     func iniciarEtiquetas(rutina: RutinaEntity) -> EtiquetaEntity {

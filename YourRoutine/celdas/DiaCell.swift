@@ -11,5 +11,14 @@ class DiaCell: UICollectionViewCell {
     @IBOutlet weak var btnDia: UIButton!
     
     @IBAction func btnDia(_ sender: UIButton) {
+        if(sender.isSelected) {
+            sender.isSelected = false
+            sender.setTitleColor(UIColor.black, for: .normal)
+            RutinaDAO().removeDiaTemporal(etiqueta: sender.titleLabel?.text ?? "")
+        } else {
+            sender.isSelected = true
+            sender.setTitleColor(UIColor.white, for: .selected)
+            RutinaDAO().addDiaTemporal(etiqueta: sender.titleLabel?.text ?? "")
+        }
     }
 }

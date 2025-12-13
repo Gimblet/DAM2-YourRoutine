@@ -39,5 +39,44 @@ class RutinaDAO : IRutinaMetodos {
         return 0
     }
     
+    // Data Temporal
+    
+    func addDiaTemporal(etiqueta:String) {
+        let previousData = UserDefaults.standard.value(forKey: "dias") as? [String]
+        
+        if(previousData != nil) {
+            var etiquetaArray:[String] = previousData!
+            etiquetaArray.append(etiqueta)
+            UserDefaults.standard.set(etiquetaArray, forKey: "dias")
+        } else {
+            var newEtiquetaArray:[String] = []
+            newEtiquetaArray.append(etiqueta)
+            UserDefaults.standard.set(newEtiquetaArray, forKey: "dias")
+        }
+    }
+    
+    func getDiaTemporal() -> [String] {
+        let previousData = UserDefaults.standard.value(forKey: "dias") as? [String]
+        if (previousData != nil) {
+            return previousData.unsafelyUnwrapped
+        }
+        return []
+    }
+    
+    func removeDiaTemporal(etiqueta:String) {
+        var previousData = UserDefaults.standard.value(forKey: "dias") as! [String]
+        var i:Int = 0
+        while previousData.count < i {
+            if(previousData[i] == etiqueta) {
+                previousData.remove(at: i)
+            }
+            i = i + 1;
+        }
+    }
+    
+    func clearTemporal() {
+        UserDefaults.standard.removeObject(forKey: "dias")
+    }
+    
 
 }
