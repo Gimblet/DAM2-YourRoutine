@@ -271,9 +271,10 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.87058823529999996" green="0.86274509799999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
-                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VLE-Kg-kKI">
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Estudiar" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VLE-Kg-kKI">
                                 <rect key="frame" x="16" y="164" width="361" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="tintColor" red="0.1843137255" green="0.1529411765" blue="0.80784313730000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
@@ -345,15 +346,6 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
-                            <textView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" layoutManager="textKit1" translatesAutoresizingMaskIntoConstraints="NO" id="rOz-2y-Xcb">
-                                <rect key="frame" x="16" y="237" width="361" height="90"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <color key="textColor" systemColor="labelColor"/>
-                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Dia(s)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="189-1x-ydp">
                                 <rect key="frame" x="16" y="462" width="361" height="23"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -367,24 +359,26 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="RY1-Sp-m5f">
-                                    <size key="itemSize" width="140" height="41"/>
-                                    <size key="estimatedItemSize" width="100" height="41"/>
+                                    <size key="itemSize" width="140" height="40"/>
+                                    <size key="estimatedItemSize" width="100" height="40"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="diasIdentifier" id="nJ6-i5-bya" customClass="DiaCell" customModule="YourRoutine" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="1" width="140" height="41"/>
+                                        <rect key="frame" x="0.0" y="1.6666666666666667" width="140" height="40"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Ypg-36-yBk">
-                                            <rect key="frame" x="0.0" y="0.0" width="140" height="41"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="140" height="40"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MBS-2O-Y1z">
+                                                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MBS-2O-Y1z">
                                                     <rect key="frame" x="8" y="3" width="0.0" height="0.0"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <color key="backgroundColor" red="0.87058823529999996" green="0.86274509799999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="40" id="4Sg-cz-0bc"/>
+                                                        <constraint firstAttribute="width" constant="100" id="nFL-CN-X50"/>
+                                                    </constraints>
                                                     <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <state key="normal" title="Button"/>
                                                     <buttonConfiguration key="configuration" style="tinted" title="Dia" cornerStyle="capsule">
@@ -476,6 +470,13 @@
                                     <segue destination="YFs-07-nEK" kind="presentation" identifier="nuevaEtiquetaIdentifier" id="Kqx-6f-ZUX"/>
                                 </connections>
                             </button>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Estudiar para el examen de Matematica" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="N6w-XQ-cIA">
+                                <rect key="frame" x="16" y="237" width="361" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="tintColor" red="0.1843137255" green="0.1529411765" blue="0.80784313730000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="GiW-XI-AMZ"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -483,10 +484,10 @@
                     <connections>
                         <outlet property="cvDias" destination="ARd-BB-J51" id="aUx-F0-hrU"/>
                         <outlet property="cvEtiquetas" destination="QmR-KL-oYA" id="Ivb-xz-LTe"/>
+                        <outlet property="txtDescripcion" destination="N6w-XQ-cIA" id="zLc-QG-OX9"/>
                         <outlet property="txtFin" destination="K1s-UZ-qaD" id="jsW-QE-HS0"/>
                         <outlet property="txtInicio" destination="vHq-8I-k0A" id="tAD-NL-Ehg"/>
                         <outlet property="txtTitulo" destination="VLE-Kg-kKI" id="7l4-gR-Non"/>
-                        <outlet property="txtvDescripcion" destination="rOz-2y-Xcb" id="TV0-cY-iUf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Xc-ek-DZt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -779,9 +780,6 @@
         <image name="house.fill" catalog="system" width="128" height="104"/>
         <image name="lightbulb.min.fill" catalog="system" width="115" height="128"/>
         <image name="square.and.arrow.up" catalog="system" width="110" height="128"/>
-        <systemColor name="labelColor">
-            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

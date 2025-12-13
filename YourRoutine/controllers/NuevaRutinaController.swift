@@ -20,7 +20,7 @@ class NuevaRutinaController: UIViewController,
     var listaDias:[String] = []
     
     @IBOutlet weak var txtTitulo: UITextField!
-    @IBOutlet weak var txtvDescripcion: UITextView!
+    @IBOutlet weak var txtDescripcion: UITextField!
     
     //Solo de Prueba ELIMINAR
     @IBOutlet weak var txtInicio: UITextField!
@@ -28,6 +28,7 @@ class NuevaRutinaController: UIViewController,
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         iniciarViewCollection()
         listadoDias()
         listadoEtiquetas()
@@ -65,7 +66,7 @@ class NuevaRutinaController: UIViewController,
     func iniciarRutina() -> RutinaEntity {
         let rutina = RutinaEntity(context: context)
         rutina.nombre = txtTitulo.text ?? ""
-        rutina.descripcion = txtvDescripcion.text ?? ""
+        rutina.descripcion = txtDescripcion.text ?? ""
         rutina.dia = "lunes, martes"
         rutina.inicio = txtInicio.text ?? ""
         rutina.fin = txtFin.text ?? ""
