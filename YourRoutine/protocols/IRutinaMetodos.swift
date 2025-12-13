@@ -8,7 +8,7 @@
 import UIKit
 
 protocol IRutinaMetodos {
-    func save(bean:RutinaEntity,etiqueta:EtiquetaEntity) -> Int
+    func save(bean:RutinaEntity,etiquetas:[EtiquetaEntity]) -> Int
     func findAll() -> [RutinaEntity]
     func update(bean:RutinaEntity) -> Int
 }

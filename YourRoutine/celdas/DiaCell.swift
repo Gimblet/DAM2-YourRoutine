@@ -14,7 +14,7 @@ class DiaCell: UICollectionViewCell {
         if(sender.isSelected) {
             sender.isSelected = false
             sender.setTitleColor(UIColor.black, for: .normal)
-            RutinaDAO().removeDiaTemporal(etiqueta: sender.titleLabel?.text ?? "")
+            RutinaDAO().removeDiaTemporal(dia: sender.titleLabel?.text ?? "")
         } else {
             sender.isSelected = true
             sender.setTitleColor(UIColor.white, for: .selected)

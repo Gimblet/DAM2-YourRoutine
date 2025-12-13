@@ -10,12 +10,17 @@ import UIKit
 class RutinaDAO : IRutinaMetodos {
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
-    func save(bean: RutinaEntity, etiqueta: EtiquetaEntity) -> Int {
+    func save(bean: RutinaEntity, etiquetas: [EtiquetaEntity]) -> Int {
         var salida = -1
 
-        do{
+        do {
+            
+            for e in etiquetas {
+                bean.addToEtiqueta(e)
+            }
+            
             try context.save()
-            salida=1
+            salida = 1
         }
         catch let x as NSError{
             print(x.localizedDescription)
@@ -63,11 +68,11 @@ class RutinaDAO : IRutinaMetodos {
         return []
     }
     
-    func removeDiaTemporal(etiqueta:String) {
+    func removeDiaTemporal(dia:String) {
         var previousData = UserDefaults.standard.value(forKey: "dias") as! [String]
         var i:Int = 0
         while previousData.count < i {
-            if(previousData[i] == etiqueta) {
+            if(previousData[i] == dia) {
                 previousData.remove(at: i)
             }
             i = i + 1;

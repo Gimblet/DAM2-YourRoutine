@@ -49,9 +49,9 @@ class NuevaRutinaController: UIViewController,
     
     @IBAction func btnConfirmar(_ sender: UIButton) {
         let rutina = iniciarRutina()
-        let etiqueta = iniciarEtiquetas(rutina: rutina)
+        let etiquetas = iniciarEtiquetas()
         
-        let estado = RutinaDAO().save(bean: rutina, etiqueta: etiqueta)
+        let estado = RutinaDAO().save(bean: rutina, etiquetas: etiquetas)
         
         RutinaDAO().clearTemporal()
         EtiquetaDAO().clearTemporal()
@@ -79,15 +79,16 @@ class NuevaRutinaController: UIViewController,
         return RutinaDAO().getDiaTemporal().joined(separator: ",")
     }
     
-    func iniciarEtiquetas(rutina: RutinaEntity) -> EtiquetaEntity {
-        let etiqueta = EtiquetaEntity(context: context)
+    func iniciarEtiquetas() -> [EtiquetaEntity] {
+        var etiquetas:[EtiquetaEntity] = []
         
         for e in EtiquetaDAO().getEtiquetaTemporal() {
+            let etiqueta = EtiquetaEntity(context: context)
             etiqueta.nombre = e
-            etiqueta.rutina = rutina
+            etiquetas.append(etiqueta)
         }
         
-        return etiqueta
+        return etiquetas
     }
     
     func iniciarViewCollection() {
