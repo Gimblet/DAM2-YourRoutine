@@ -22,7 +22,7 @@ class ViewController: UIViewController {
         actualizarCampos()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         actualizarCampos()
     }
     
