@@ -31,13 +31,45 @@ class RutinaDAO : IRutinaMetodos {
     func findAll() -> [RutinaEntity] {
         var lista: [RutinaEntity] = []
         do{
-            let rutinas=RutinaEntity.fetchRequest()
-            lista=try context.fetch(rutinas)
+            let rutinas = RutinaEntity.fetchRequest()
+            lista = try context.fetch(rutinas)
         }
         catch let x as NSError{
             print(x.localizedDescription)
         }
         return lista
+    }
+    
+    func findCurrent() -> RutinaEntity? {
+            func timeToInt(_ timeString: String?) -> Int? {
+                guard let time = timeString else { return nil }
+                let components = time.split(separator: ":")
+                guard components.count == 2,
+                      let hours = Int(components[0]),
+                      let minutes = Int(components[1]) else { return nil }
+                return hours * 100 + minutes
+            }
+            
+            let calendar = Calendar.current
+            let now = Date()
+            let currentHour = calendar.component(.hour, from: now)
+            let currentMinute = calendar.component(.minute, from: now)
+            let currentTime = currentHour * 100 + currentMinute
+            
+            let fetchRequest = RutinaEntity.fetchRequest()
+            
+            do {
+                let rutinas = try context.fetch(fetchRequest)
+                
+                return rutinas.first { routine in
+                    guard let initTime = timeToInt(routine.inicio),
+                          let endTime = timeToInt(routine.fin) else { return false }
+                    return currentTime >= initTime && currentTime <= endTime
+                }
+            } catch {
+                print("Error fetching routines: \(error)")
+                return nil
+            }
     }
     
     func update(bean: RutinaEntity) -> Int {
