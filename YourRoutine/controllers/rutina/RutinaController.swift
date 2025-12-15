@@ -26,6 +26,10 @@ class RutinaController: UIViewController,
         performSegue(withIdentifier: "nuevaRutina", sender: nil)
     }
     
+    @IBAction func btnEditarRutina(_ sender: UIButton) {
+        performSegue(withIdentifier: "editarRutina", sender: nil)
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return lista.count
     }
