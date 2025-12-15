@@ -6,6 +6,7 @@ class RutinaCell: UITableViewCell {
     
     @IBOutlet weak var lblTitRutina: UILabel!
     @IBOutlet weak var lblEtiqueta: UILabel!
+    @IBOutlet weak var lblEtiquetaExtra: UILabel!
     @IBOutlet weak var lblFrecuencia: UILabel!
     @IBOutlet weak var lblTiempo: UILabel!
     @IBOutlet weak var lblDiasSem: UILabel!

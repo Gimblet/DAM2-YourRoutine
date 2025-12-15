@@ -43,6 +43,10 @@ class RutinaController: UIViewController,
             if (etiquetasArray.isEmpty) {
                 fila.lblEtiqueta.text = "Sin Etiquetas"
             } else {
+                if(etiquetasArray.count > 1) {
+                    fila.lblEtiquetaExtra.isHidden = false
+                    fila.lblEtiquetaExtra.text = "+\(etiquetasArray.count - 1)"
+                }
                 fila.lblEtiqueta.text = "\(etiquetasArray[0].nombre.unsafelyUnwrapped)"
             }
         }
