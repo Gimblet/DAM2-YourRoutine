@@ -41,7 +41,7 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.87058823529999996" green="0.86274509799999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
-                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" progress="0.5" progressImage="square.and.arrow.up" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="dwp-pI-phl">
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="dwp-pI-phl">
                                 <rect key="frame" x="32" y="475" width="329" height="4"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="progressTintColor" red="0.20784313730000001" green="0.1843137255" blue="0.80392156859999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -914,7 +914,6 @@
         <image name="house.fill" catalog="system" width="128" height="104"/>
         <image name="lightbulb.min.fill" catalog="system" width="115" height="128"/>
         <image name="pencil.and.list.clipboard" catalog="system" width="114" height="128"/>
-        <image name="square.and.arrow.up" catalog="system" width="110" height="128"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

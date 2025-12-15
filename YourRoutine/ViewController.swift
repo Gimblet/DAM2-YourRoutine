@@ -32,15 +32,24 @@ class ViewController: UIViewController {
             let currentMin:String = String(getCurrentMin(rutina: currentRoutine))
             let totalMin:String = String(getTotalMin(rutina: currentRoutine))
             
+            pwProgreso.observedProgress = getCurrentProgress(current: currentMin, total: totalMin)
             lblProgresoMin.text = "\(currentMin)/\(totalMin) min"
             btnRutinaHasta.setTitle(until, for: .normal)
             lblRutinaTitulo.text = currentRoutine.nombre.unsafelyUnwrapped
         } else {
+            pwProgreso.progress = 0.01
             lblProgresoMin.text = "..."
             lblRutinaActual.text = "Sin Rutina"
             btnRutinaHasta.setTitle("Estas libre ;)", for: .normal)
             lblRutinaTitulo.text = "Descansa, te lo mereces..."
         }
+    }
+    
+    func getCurrentProgress(current:String, total:String) -> Progress {
+        let progress = Progress()
+        progress.totalUnitCount = Int64(total).unsafelyUnwrapped
+        progress.completedUnitCount = Int64(current).unsafelyUnwrapped
+        return progress
     }
     
     func getCurrentMin(rutina:RutinaEntity) -> Int {
