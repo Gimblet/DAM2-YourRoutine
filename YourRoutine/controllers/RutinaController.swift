@@ -33,17 +33,28 @@ class RutinaController: UIViewController,
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let fila = tablaRutinas.dequeueReusableCell(withIdentifier: "filaRutina") as! RutinaCell
         let frecuencia = lista[indexPath.row].dia?.components(separatedBy: ",").count
-        
-        // TODO: change to get actual tag instead of a placeholder
-        // let etiqueta = lista[indexPath.row].self.etiqueta
+        let etiqueta = lista[indexPath.row].etiqueta
+        let inicioMinuto = toMinuto(tiempo: lista[indexPath.row].inicio.unsafelyUnwrapped)
+        let finMinuto = toMinuto(tiempo: lista[indexPath.row].fin.unsafelyUnwrapped)
                 
         fila.lblTitRutina.text = lista[indexPath.row].nombre
-        fila.lblEtiqueta.text = "Programacion"
+        fila.lblEtiqueta.text = "\(etiqueta!)"
         fila.lblFrecuencia.text = String("\(frecuencia ?? 0)" + "x por semana")
-        fila.lblTiempo.text = lista[indexPath.row].inicio
+        fila.lblTiempo.text = String(finMinuto - inicioMinuto) + " min"
         fila.lblDiasSem.text = lista[indexPath.row].dia
 
         return fila
+    }
+    
+    func toMinuto(tiempo:String) -> Int {
+        let arrayTiempo:[String] = tiempo.components(separatedBy: ":")
+        var arrayNumero:[Int] = []
+        
+        for t in arrayTiempo {
+            arrayNumero.append(Int(t).unsafelyUnwrapped)
+        }
+        
+        return ((arrayNumero[0] * 60) + arrayNumero[1])
     }
     
 }

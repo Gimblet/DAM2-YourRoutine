@@ -22,9 +22,8 @@ class NuevaRutinaController: UIViewController,
     @IBOutlet weak var txtTitulo: UITextField!
     @IBOutlet weak var txtDescripcion: UITextField!
     
-    //Solo de Prueba ELIMINAR
-    @IBOutlet weak var txtInicio: UITextField!
-    @IBOutlet weak var txtFin: UITextField!
+    @IBOutlet weak var tmInicio: UIDatePicker!
+    @IBOutlet weak var tmFin: UIDatePicker!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -70,13 +69,19 @@ class NuevaRutinaController: UIViewController,
         rutina.nombre = txtTitulo.text ?? ""
         rutina.descripcion = txtDescripcion.text ?? ""
         rutina.dia = parsearDiasSelecionados()
-        rutina.inicio = txtInicio.text ?? ""
-        rutina.fin = txtFin.text ?? ""
+        rutina.inicio = parsearTiempo(date: tmInicio.date)
+        rutina.fin = parsearTiempo(date: tmFin.date)
         return rutina
     }
     
     func parsearDiasSelecionados() -> String {
         return RutinaDAO().getDiaTemporal().joined(separator: ",")
+    }
+    
+    func parsearTiempo(date: Date) -> String {
+        let format = DateFormatter()
+        format.dateFormat = "HH:mm"
+        return format.string(from: date)
     }
     
     func iniciarEtiquetas() -> [EtiquetaEntity] {
