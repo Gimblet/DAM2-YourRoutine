@@ -78,7 +78,7 @@ class RutinaDAO : IRutinaMetodos {
     
     // Data Temporal
     
-    func addDiaTemporal(etiqueta:String) {
+    /*func addDiaTemporal(etiqueta:String) {
         let previousData = UserDefaults.standard.value(forKey: "dias") as? [String]
         
         if(previousData != nil) {
@@ -90,7 +90,7 @@ class RutinaDAO : IRutinaMetodos {
             newEtiquetaArray.append(etiqueta)
             UserDefaults.standard.set(newEtiquetaArray, forKey: "dias")
         }
-    }
+    }*/
     
     func getDiaTemporal() -> [String] {
         let previousData = UserDefaults.standard.value(forKey: "dias") as? [String]
@@ -100,20 +100,45 @@ class RutinaDAO : IRutinaMetodos {
         return []
     }
     
-    func removeDiaTemporal(dia:String) {
-        var previousData = UserDefaults.standard.value(forKey: "dias") as! [String]
+   /* func removeDiaTemporal(dia:String) {
+        /*var previousData = UserDefaults.standard.value(forKey: "dias") as! [String]
         var i:Int = 0
-        while previousData.count < i {
+        while i < previousData.count {
             if(previousData[i] == dia) {
                 previousData.remove(at: i)
             }
             i = i + 1;
-        }
-    }
+        }*/
+        
+        guard var dias = UserDefaults.standard.value(forKey: "dias") as? [String] else {
+                return
+            }
+
+            dias.removeAll { $0 == dia }
+            UserDefaults.standard.set(dias, forKey: "dias")
+    }*/
     
     func clearTemporal() {
         UserDefaults.standard.removeObject(forKey: "dias")
     }
     
+    func setDiaTemporal(_ dias: [String]) {
+        UserDefaults.standard.set(dias, forKey: "dias")
+    }
+    
+    
+    
+    func toggleDia(_ dia: String) {
+        var dias = getDiaTemporal()
+            
+            if dias.contains(dia) {
+                dias.removeAll { $0 == dia }
+            } else {
+                dias.append(dia)
+            }
+            
+            setDiaTemporal(dias)
+    }
+
 
 }

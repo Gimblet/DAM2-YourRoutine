@@ -68,7 +68,7 @@ class EtiquetaDAO: IEtiquetaMetodos {
     func removeEtiquetaTemporal(etiqueta:String) {
         var previousData = UserDefaults.standard.value(forKey: "etiquetas") as! [String]
         var i:Int = 0
-        while previousData.count < i {
+        while i < previousData.count {
             if(previousData[i] == etiqueta) {
                 previousData.remove(at: i)
             }
@@ -79,4 +79,19 @@ class EtiquetaDAO: IEtiquetaMetodos {
     func clearTemporal() {
         UserDefaults.standard.removeObject(forKey: "etiquetas")
     }
+    
+    func setEtiquetaTemporal(_ etiquetas: [String]) {
+        UserDefaults.standard.set(etiquetas, forKey: "etiquetas")
+    }
+
+    
+    func toggleEtiqueta(_ nombre: String) {
+        var etiquetas = getEtiquetaTemporal()
+            if etiquetas.contains(nombre) {
+                etiquetas.removeAll { $0 == nombre }
+            } else {
+                etiquetas.append(nombre)
+            }
+            setEtiquetaTemporal(etiquetas)    }
+
 }

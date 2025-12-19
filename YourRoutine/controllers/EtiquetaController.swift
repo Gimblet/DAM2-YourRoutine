@@ -10,6 +10,9 @@ import UIKit
 class EtiquetaController: UIViewController {
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var rutina:NuevaRutinaController!
+    
+    var rutinaEdit:EditarRutinaController!
+    
 
     @IBOutlet weak var txtEtiqueta: UITextField!
     
@@ -27,8 +30,19 @@ class EtiquetaController: UIViewController {
             print("Ocurrio un error al agregar etiqueta")
         }
         
-        rutina.listadoEtiquetas()
+        /*rutina.listadoEtiquetas()
         rutina.cvEtiquetas.reloadData()
+        
+        rutinaEdit.listadoEtiquetas()
+        rutinaEdit.cvEtiquetas.reloadData()*/
+        
+        // Si viene de NuevaRutina
+            rutina?.listadoEtiquetas()
+            rutina?.cvEtiquetas.reloadData()
+
+            // Si viene de EditarRutina
+            rutinaEdit?.listadoEtiquetas()
+            rutinaEdit?.cvEtiquetas.reloadData()
         
         dismiss(animated: true)
     }

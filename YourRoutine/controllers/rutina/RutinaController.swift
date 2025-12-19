@@ -9,6 +9,9 @@ class RutinaController: UIViewController,
 
     var lista:[RutinaEntity] = []
     
+    var rutinaSeleccionada: RutinaEntity?
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         lista=RutinaDAO().findAll()
@@ -27,7 +30,13 @@ class RutinaController: UIViewController,
     }
     
     @IBAction func btnEditarRutina(_ sender: UIButton) {
-        performSegue(withIdentifier: "editarRutina", sender: nil)
+        if let indexPath = tablaRutinas.indexPathForSelectedRow {
+            rutinaSeleccionada = lista[indexPath.row]
+            performSegue(withIdentifier: "editarRutina", sender: nil)
+        } else {
+            print("seleciona primero")
+        }
+        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -72,4 +81,12 @@ class RutinaController: UIViewController,
         return ((arrayNumero[0] * 60) + arrayNumero[1])
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "editarRutina" {
+            if let destino = segue.destination as? EditarRutinaController {
+                destino.rutina = rutinaSeleccionada
+            }
+        }
+    }
+
 }

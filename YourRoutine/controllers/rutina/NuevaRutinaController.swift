@@ -47,6 +47,11 @@ class NuevaRutinaController: UIViewController,
     }
     
     @IBAction func btnConfirmar(_ sender: UIButton) {
+        // validar formulario
+        if !validarFormulario() {
+            return
+        }
+        
         let rutina = iniciarRutina()
         let etiquetas = iniciarEtiquetas()
         
@@ -172,5 +177,41 @@ class NuevaRutinaController: UIViewController,
         //mostrar el objeto "alert"
         present(alert, animated: true)
     }
+    
+    func validarFormulario() -> Bool {
+        
+        // Validar título
+        if txtTitulo.text?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true {
+            ventana(msj: "Debe ingresar un título para la rutina")
+            return false
+        }
+        
+        // Validar descripción
+        if txtDescripcion.text?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true {
+            ventana(msj: "Debe ingresar una descripción")
+            return false
+        }
+        
+        // Validar días seleccionados
+        if RutinaDAO().getDiaTemporal().isEmpty {
+            ventana(msj: "Debe seleccionar al menos un día")
+            return false
+        }
+        
+        // Validar etiquetas seleccionadas
+        if EtiquetaDAO().getEtiquetaTemporal().isEmpty {
+            ventana(msj: "Debe seleccionar al menos una etiqueta")
+            return false
+        }
+        
+        // Validar horas
+        if tmInicio.date >= tmFin.date {
+            ventana(msj: "La hora de inicio debe ser menor que la hora de fin")
+            return false
+        }
+        
+        return true
+    }
+
     
 }
