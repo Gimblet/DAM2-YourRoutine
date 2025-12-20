@@ -87,6 +87,13 @@ class RutinaController: UIViewController,
                 destino.rutina = rutinaSeleccionada
             }
         }
+        else if segue.identifier == "detalleRutina" {
+            let vc = segue.destination as! DetallesRutinaController
+            let indexPath = tablaRutinas.indexPathForSelectedRow!
+            vc.bean = lista[indexPath.row]
+        }
     }
-
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "detalleRutina", sender: nil)
+    }
 }
