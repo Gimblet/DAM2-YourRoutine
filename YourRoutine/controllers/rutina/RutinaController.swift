@@ -25,6 +25,10 @@ class RutinaController: UIViewController,
         tablaRutinas.reloadData()
     }
     
+    @IBAction func btnDetallesRutina(_ sender: UIButton) {
+        performSegue(withIdentifier: "detalleRutina", sender: nil)
+    }
+    
     @IBAction func btnNuevaRutina(_ sender: UIButton) {
         performSegue(withIdentifier: "nuevaRutina", sender: nil)
     }
@@ -37,6 +41,9 @@ class RutinaController: UIViewController,
             print("seleciona primero")
         }
         
+    }
+    
+    @IBAction func btnEliminarRutina(_ sender: UIButton) {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -93,7 +100,5 @@ class RutinaController: UIViewController,
             vc.bean = lista[indexPath.row]
         }
     }
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "detalleRutina", sender: nil)
-    }
+    
 }
