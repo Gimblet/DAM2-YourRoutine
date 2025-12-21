@@ -22,6 +22,9 @@ class EtiquetaController: UIViewController {
     
     @IBAction func btnAgregar(_ sender: UIButton) {
         let etiqueta = EtiquetaEntity(context: context)
+        
+        if((txtEtiqueta.text?.isEmpty) != nil) { dismiss(animated: true); return }
+        
         etiqueta.nombre = txtEtiqueta.text
         
         let resultado = EtiquetaDAO().save(bean: etiqueta)
