@@ -8,6 +8,20 @@
 import UIKit
 
 class RutinaDAO : IRutinaMetodos {
+    func delete(bean: RutinaEntity) -> Int {
+        var salida = -1
+
+        do {
+            context.delete(bean)
+            try context.save()
+            salida = 1
+        }
+        catch let x as NSError{
+            print(x.localizedDescription)
+        }
+        return salida
+    }
+    
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     func save(bean: RutinaEntity, etiquetas: [EtiquetaEntity]) -> Int {

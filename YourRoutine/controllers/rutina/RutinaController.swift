@@ -38,12 +38,18 @@ class RutinaController: UIViewController,
             rutinaSeleccionada = lista[indexPath.row]
             performSegue(withIdentifier: "editarRutina", sender: nil)
         } else {
-            print("seleciona primero")
+            print("Se debe seleccionar una rutina primero")
         }
-        
     }
     
     @IBAction func btnEliminarRutina(_ sender: UIButton) {
+        let msj = "Esta segur@ que quiere eliminar esta rutina?. Esta accion es irreversible"
+        if let indexPath = tablaRutinas.indexPathForSelectedRow {
+            let entity = lista[indexPath.row]
+            ventanaEliminar(msj: msj, entity: entity)
+        } else {
+            print("Se debe seleccionar una rutina primero")
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -99,6 +105,18 @@ class RutinaController: UIViewController,
             let indexPath = tablaRutinas.indexPathForSelectedRow!
             vc.bean = lista[indexPath.row]
         }
+    }
+    
+    func ventanaEliminar(msj:String, entity:RutinaEntity) {
+        let alert=UIAlertController(title: "Sistema", message: msj, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Eliminar", style: .destructive, handler: { h in
+            RutinaDAO().delete(bean: entity)
+            self.dismiss(animated: true)
+            self.lista = RutinaDAO().findAll()
+            self.tablaRutinas.reloadData()
+        }))
+        alert.addAction(UIAlertAction(title: "Cancelar", style: .cancel))
+        present(alert, animated: true)
     }
     
 }
