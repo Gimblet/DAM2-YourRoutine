@@ -747,8 +747,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="150" height="40"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1bF-Ag-p7Y">
-                                                    <rect key="frame" x="8" y="4" width="150" height="40"/>
+                                                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1bF-Ag-p7Y">
+                                                    <rect key="frame" x="8" y="4" width="0.0" height="0.0"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="40" id="E4H-TB-g7r"/>
                                                         <constraint firstAttribute="width" constant="150" id="Lzj-CN-pfU"/>
@@ -765,10 +765,6 @@
                                                     </connections>
                                                 </button>
                                             </subviews>
-                                            <constraints>
-                                                <constraint firstItem="1bF-Ag-p7Y" firstAttribute="leading" secondItem="41p-ex-WiD" secondAttribute="leadingMargin" id="FsZ-Zo-0X3"/>
-                                                <constraint firstItem="1bF-Ag-p7Y" firstAttribute="top" secondItem="41p-ex-WiD" secondAttribute="top" constant="4" id="tRa-l2-xWn"/>
-                                            </constraints>
                                         </collectionViewCellContentView>
                                         <connections>
                                             <outlet property="btnEtiqueta" destination="1bF-Ag-p7Y" id="8zQ-P7-rVJ"/>
@@ -817,8 +813,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="140" height="40"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MBS-2O-Y1z">
-                                                    <rect key="frame" x="8" y="3" width="100" height="40"/>
+                                                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MBS-2O-Y1z">
+                                                    <rect key="frame" x="8" y="3" width="0.0" height="0.0"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="40" id="4Sg-cz-0bc"/>
                                                         <constraint firstAttribute="width" constant="100" id="nFL-CN-X50"/>
@@ -835,10 +831,6 @@
                                                     </connections>
                                                 </button>
                                             </subviews>
-                                            <constraints>
-                                                <constraint firstItem="MBS-2O-Y1z" firstAttribute="leading" secondItem="Ypg-36-yBk" secondAttribute="leadingMargin" id="CYY-Wd-tgn"/>
-                                                <constraint firstItem="MBS-2O-Y1z" firstAttribute="top" secondItem="Ypg-36-yBk" secondAttribute="top" constant="3" id="o9t-xJ-GmJ"/>
-                                            </constraints>
                                         </collectionViewCellContentView>
                                         <connections>
                                             <outlet property="btnDia" destination="MBS-2O-Y1z" id="8VS-j5-apr"/>
@@ -1221,13 +1213,13 @@
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGroupedBackgroundColor">
-            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemPurpleColor">
-            <color red="0.68627450980392157" green="0.32156862745098042" blue="0.87058823529411766" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.68627450980000004" green="0.32156862749999998" blue="0.87058823529999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="tableCellBlueTextColor">
-            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

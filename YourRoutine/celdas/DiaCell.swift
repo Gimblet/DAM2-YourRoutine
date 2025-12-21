@@ -23,15 +23,13 @@ class DiaCell: UICollectionViewCell {
         
         
         guard let dia = sender.titleLabel?.text else { return }
+        sender.isSelected.toggle()
 
-                // Cambiar estado visual
-                sender.isSelected.toggle()
+        sender.setTitleColor(.black, for: .normal)
+        sender.setTitleColor(UIColor.white, for: .selected)
 
-                sender.backgroundColor = sender.isSelected ? .systemBlue : .lightGray
-                sender.setTitleColor(.white, for: .normal)
-
-                // Lógica de negocio
-                RutinaDAO().toggleDia(dia)
+        // Lógica de negocio        
+        RutinaDAO().toggleDia(dia)
     }
     
     func configurar(nombre: String, seleccionado: Bool) {
