@@ -365,20 +365,6 @@
                                 <color key="textColor" red="0.1843137255" green="0.1529411765" blue="0.80784313730000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rvR-Fm-7hi">
-                                <rect key="frame" x="125" y="281" width="35" height="35"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="tintColor" red="0.87058823529999996" green="0.86274509799999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" title="+" cornerStyle="capsule">
-                                    <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    <color key="baseBackgroundColor" red="0.87058823529999996" green="0.86274509799999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </buttonConfiguration>
-                                <connections>
-                                    <action selector="btnEtiqueta:" destination="Iin-8Q-Vqg" eventType="touchUpInside" id="Zb1-mB-JoR"/>
-                                    <action selector="btnNuevaEtiqueta:" destination="C30-Hy-P94" eventType="touchUpInside" id="Kmu-hv-PgI"/>
-                                </connections>
-                            </button>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="mSQ-WS-9fi">
                                 <rect key="frame" x="16" y="318" width="361" height="81"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -398,8 +384,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="150" height="40"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Skt-iU-HjA">
-                                                    <rect key="frame" x="8" y="4" width="150" height="40"/>
+                                                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Skt-iU-HjA">
+                                                    <rect key="frame" x="8" y="4" width="0.0" height="0.0"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="40" id="COC-DO-PAj"/>
                                                         <constraint firstAttribute="width" constant="150" id="DNj-UJ-LZZ"/>
@@ -416,10 +402,6 @@
                                                     </connections>
                                                 </button>
                                             </subviews>
-                                            <constraints>
-                                                <constraint firstItem="Skt-iU-HjA" firstAttribute="leading" secondItem="0Ry-qc-KBc" secondAttribute="leadingMargin" id="YDx-ZT-hgp"/>
-                                                <constraint firstItem="Skt-iU-HjA" firstAttribute="top" secondItem="0Ry-qc-KBc" secondAttribute="top" constant="4" id="z0g-ui-SIz"/>
-                                            </constraints>
                                         </collectionViewCellContentView>
                                         <connections>
                                             <outlet property="btnEtiqueta" destination="Skt-iU-HjA" id="hkW-ms-cYd"/>
@@ -454,8 +436,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="140" height="40"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ySc-fB-wsL">
-                                                    <rect key="frame" x="8" y="3" width="100" height="40"/>
+                                                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ySc-fB-wsL">
+                                                    <rect key="frame" x="8" y="3" width="0.0" height="0.0"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="100" id="Vfx-GL-stF"/>
                                                         <constraint firstAttribute="height" constant="40" id="tEb-d1-GHT"/>
@@ -472,10 +454,6 @@
                                                     </connections>
                                                 </button>
                                             </subviews>
-                                            <constraints>
-                                                <constraint firstItem="ySc-fB-wsL" firstAttribute="top" secondItem="QrU-Zg-NmC" secondAttribute="top" constant="3" id="4Kc-9z-R7X"/>
-                                                <constraint firstItem="ySc-fB-wsL" firstAttribute="leading" secondItem="QrU-Zg-NmC" secondAttribute="leadingMargin" id="Ue1-9z-0qk"/>
-                                            </constraints>
                                         </collectionViewCellContentView>
                                         <connections>
                                             <outlet property="btnDia" destination="ySc-fB-wsL" id="3wA-co-Rch"/>
@@ -523,6 +501,20 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rvR-Fm-7hi">
+                                <rect key="frame" x="111" y="281" width="35" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="tintColor" red="0.87058823529999996" green="0.86274509799999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="+" cornerStyle="capsule">
+                                    <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="baseBackgroundColor" red="0.87058823529999996" green="0.86274509799999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="btnEtiqueta:" destination="Iin-8Q-Vqg" eventType="touchUpInside" id="Zb1-mB-JoR"/>
+                                    <action selector="btnNuevaEtiqueta:" destination="C30-Hy-P94" eventType="touchUpInside" id="Kmu-hv-PgI"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="AeL-Em-coy"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -1224,7 +1216,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Kqx-6f-ZUX"/>
+        <segue reference="9je-rI-Xe7"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.1843137255" green="0.1529411765" blue="0.80784313730000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
     <resources>
