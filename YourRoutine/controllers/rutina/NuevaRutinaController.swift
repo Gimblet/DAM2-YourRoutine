@@ -215,6 +215,5 @@ class NuevaRutinaController: UIViewController,
         
         return true
     }
-
     
 }

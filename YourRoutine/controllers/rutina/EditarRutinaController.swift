@@ -24,8 +24,8 @@ class EditarRutinaController: UIViewController,
     var listaEtiquetas:[EtiquetaEntityModel] = []
     var listaDias:[String] = []
     
-
-
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -68,7 +68,6 @@ class EditarRutinaController: UIViewController,
         
         cvDias.reloadData()
         cvEtiquetas.reloadData()
-        
     }
     
     func convertirHora(_ hora:String) -> Date {
@@ -140,9 +139,6 @@ class EditarRutinaController: UIViewController,
         listaDias.append("Domingo")
     }
     
-    
-    
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == cvDias {
             return listaDias.count
@@ -152,32 +148,27 @@ class EditarRutinaController: UIViewController,
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-      
-
         if collectionView == cvDias {
-                let cell = cvDias.dequeueReusableCell(
-                    withReuseIdentifier: "diasIdentifier",
-                    for: indexPath
-                ) as! DiaCell
-
-                let dia = listaDias[indexPath.row]
-                let seleccionado = RutinaDAO().getDiaTemporal().contains(dia)
-
-                cell.configurar(nombre: dia, seleccionado: seleccionado)
-                return cell
-            } else {
-                let cell = cvEtiquetas.dequeueReusableCell(
-                    withReuseIdentifier: "etiquetasIdentifier",
-                    for: indexPath
-                ) as! EtiquetaCell
-
-                cell.btnEtiqueta.setTitle(listaEtiquetas[indexPath.row].nombre, for: .normal)
-                return cell
-            }
+            let cell = cvDias.dequeueReusableCell(
+                withReuseIdentifier: "diasIdentifier",
+                for: indexPath
+            ) as! DiaCell
+            
+            let dia = listaDias[indexPath.row]
+            let seleccionado = RutinaDAO().getDiaTemporal().contains(dia)
+            
+            cell.configurar(nombre: dia, seleccionado: seleccionado)
+            return cell
+        } else {
+            let cell = cvEtiquetas.dequeueReusableCell(
+                withReuseIdentifier: "etiquetasIdentifier",
+                for: indexPath
+            ) as! EtiquetaCell
+            
+            cell.btnEtiqueta.setTitle(listaEtiquetas[indexPath.row].nombre, for: .normal)
+            return cell
+        }
     }
-    
-    
-
     
     @IBAction func btnEditar(_ sender: UIButton) {
         
@@ -186,32 +177,32 @@ class EditarRutinaController: UIViewController,
         }
         
         rutina.nombre = txtTitulo.text ?? ""
-            rutina.descripcion = txtDescripcion.text ?? ""
-            rutina.dia = RutinaDAO().getDiaTemporal().joined(separator: ",")
-            rutina.inicio = parsearTiempo(date: tmInicio.date)
-            rutina.fin = parsearTiempo(date: tmFinal.date)
-
-            // Limpiar etiquetas anteriores
-            if let etiquetasViejas = rutina.etiqueta as? Set<EtiquetaEntity> {
-                for e in etiquetasViejas {
-                    context.delete(e)
-                }
+        rutina.descripcion = txtDescripcion.text ?? ""
+        rutina.dia = RutinaDAO().getDiaTemporal().joined(separator: ",")
+        rutina.inicio = parsearTiempo(date: tmInicio.date)
+        rutina.fin = parsearTiempo(date: tmFinal.date)
+        
+        // Limpiar etiquetas anteriores
+        if let etiquetasViejas = rutina.etiqueta as? Set<EtiquetaEntity> {
+            for e in etiquetasViejas {
+                context.delete(e)
             }
-
-            // Nuevas etiquetas
-            for nombre in EtiquetaDAO().getEtiquetaTemporal() {
-                let etiqueta = EtiquetaEntity(context: context)
-                etiqueta.nombre = nombre
-                etiqueta.rutina = rutina
-            }
-
-            do {
-                try context.save()
-                ventana(msj: "Rutina actualizada con éxito")
-                dismiss(animated: true)
-            } catch {
-                ventana(msj: "Error al actualizar la rutina")
-            }
+        }
+        
+        // Nuevas etiquetas
+        for nombre in EtiquetaDAO().getEtiquetaTemporal() {
+            let etiqueta = EtiquetaEntity(context: context)
+            etiqueta.nombre = nombre
+            etiqueta.rutina = rutina
+        }
+        
+        do {
+            try context.save()
+            ventana(msj: "Rutina actualizada con éxito")
+            dismiss(animated: true)
+        } catch {
+            ventana(msj: "Error al actualizar la rutina")
+        }
     }
     
     @IBAction func btnRegresar(_ sender: UIButton) {
@@ -233,8 +224,6 @@ class EditarRutinaController: UIViewController,
         performSegue(withIdentifier: "nuevaEtiquetaIdentifier", sender: nil)
     }
     
-    
-    
     func validarFormulario() -> Bool {
         
         // Validar título
@@ -255,12 +244,6 @@ class EditarRutinaController: UIViewController,
             return false
         }
         
-        // Validar etiquetas seleccionadas
-        if EtiquetaDAO().getEtiquetaTemporal().isEmpty {
-            ventana(msj: "Debe seleccionar al menos una etiqueta")
-            return false
-        }
-        
         // Validar horas
         if tmInicio.date >= tmFinal.date {
             ventana(msj: "La hora de inicio debe ser menor que la hora de fin")
@@ -269,6 +252,6 @@ class EditarRutinaController: UIViewController,
         
         return true
     }
-
+    
     
 }
