@@ -20,6 +20,7 @@
         <attribute name="fin" optional="YES" attributeType="String"/>
         <attribute name="inicio" optional="YES" attributeType="String"/>
         <attribute name="nombre" optional="YES" attributeType="String"/>
+        <attribute name="progreso" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
         <relationship name="etiqueta" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="EtiquetaEntity" inverseName="rutina" inverseEntity="EtiquetaEntity"/>
     </entity>
 </model>

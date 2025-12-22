@@ -37,11 +37,14 @@ class ViewController: UIViewController {
             let until = "Hasta las \(currentRoutine.fin!)"
             let currentMin:String = String(getCurrentMin(rutina: currentRoutine))
             let totalMin:String = String(getTotalMin(rutina: currentRoutine))
+            let roundedProgress:Int = Int(round(Double(currentRoutine.progreso)))
             
-            pwTiempo.observedProgress = getCurrentProgress(current: currentMin, total: totalMin)
+            pwTiempo.observedProgress = getCurrentTime(current: currentMin, total: totalMin)
             lblTiempo.text = "\(currentMin)/\(totalMin) min"
             btnRutinaHasta.setTitle(until, for: .normal)
             lblRutinaTitulo.text = currentRoutine.nombre.unsafelyUnwrapped
+            lblProgreso.text = "Progreso Registrado (\(roundedProgress) %)"
+            pwProgreso.observedProgress = getCurrentProgress(current: currentRoutine.progreso, total: 100)
         } else {
             pwTiempo.progress = 0.01
             lblTiempo.text = "..."
@@ -52,7 +55,17 @@ class ViewController: UIViewController {
         }
     }
     
-    func getCurrentProgress(current:String, total:String) -> Progress {
+    func getCurrentProgress(current:Float, total:Float) -> Progress {
+        let progress = Progress()
+        let totalInt = Int(total)
+        let currentInt = Int(current)
+        
+        progress.totalUnitCount = Int64(exactly: totalInt).unsafelyUnwrapped
+        progress.completedUnitCount = Int64(exactly: currentInt).unsafelyUnwrapped
+        return progress
+    }
+    
+    func getCurrentTime(current:String, total:String) -> Progress {
         let progress = Progress()
         progress.totalUnitCount = Int64(total).unsafelyUnwrapped
         progress.completedUnitCount = Int64(current).unsafelyUnwrapped

@@ -25,6 +25,8 @@ class NuevaRutinaController: UIViewController,
     @IBOutlet weak var tmInicio: UIDatePicker!
     @IBOutlet weak var tmFin: UIDatePicker!
     
+    @IBOutlet weak var slProgreso: UISlider!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -76,6 +78,7 @@ class NuevaRutinaController: UIViewController,
         rutina.dia = parsearDiasSelecionados()
         rutina.inicio = parsearTiempo(date: tmInicio.date)
         rutina.fin = parsearTiempo(date: tmFin.date)
+        rutina.progreso = slProgreso.value
         return rutina
     }
     

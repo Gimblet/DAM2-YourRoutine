@@ -13,4 +13,5 @@ struct RutinaModel {
     var fin:String
     var inicio:String
     var nombre:String
+    var progreso:Float
 }
