@@ -8,14 +8,20 @@
 import UIKit
 
 class ViewController: UIViewController {
-    @IBOutlet weak var lblProgresoMin: UILabel!
-    @IBOutlet weak var pwProgreso: UIProgressView!
+    @IBOutlet weak var lblTiempo: UILabel!
+    @IBOutlet weak var pwTiempo: UIProgressView!
     
     @IBOutlet weak var lblRutinaActual: UILabel!
     @IBOutlet weak var btnRutinaHasta: UIButton!
     @IBOutlet weak var lblRutinaTitulo: UILabel!
+    @IBOutlet weak var lblProgreso: UILabel!
+    @IBOutlet weak var pwProgreso: UIProgressView!
     
     var rutinaActual:RutinaEntity = RutinaEntity()
+    
+    @IBAction func btnNuevaRutina(_ sender: UIButton) {
+        performSegue(withIdentifier: "nuevaRutina", sender: nil)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,16 +38,17 @@ class ViewController: UIViewController {
             let currentMin:String = String(getCurrentMin(rutina: currentRoutine))
             let totalMin:String = String(getTotalMin(rutina: currentRoutine))
             
-            pwProgreso.observedProgress = getCurrentProgress(current: currentMin, total: totalMin)
-            lblProgresoMin.text = "\(currentMin)/\(totalMin) min"
+            pwTiempo.observedProgress = getCurrentProgress(current: currentMin, total: totalMin)
+            lblTiempo.text = "\(currentMin)/\(totalMin) min"
             btnRutinaHasta.setTitle(until, for: .normal)
             lblRutinaTitulo.text = currentRoutine.nombre.unsafelyUnwrapped
         } else {
-            pwProgreso.progress = 0.01
-            lblProgresoMin.text = "..."
+            pwTiempo.progress = 0.01
+            lblTiempo.text = "..."
             lblRutinaActual.text = "Sin Rutina"
             btnRutinaHasta.setTitle("Estas libre ;)", for: .normal)
             lblRutinaTitulo.text = "Descansa, te lo mereces..."
+            lblProgreso.text = "..."
         }
     }
     
