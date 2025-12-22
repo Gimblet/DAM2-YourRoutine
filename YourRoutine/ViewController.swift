@@ -51,7 +51,8 @@ class ViewController: UIViewController {
             lblRutinaActual.text = "Sin Rutina"
             btnRutinaHasta.setTitle("Estas libre ;)", for: .normal)
             lblRutinaTitulo.text = "Descansa, te lo mereces..."
-            lblProgreso.text = "..."
+            lblProgreso.isHidden = true
+            pwProgreso.progress = 1
         }
     }
     
