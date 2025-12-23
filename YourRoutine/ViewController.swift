@@ -11,6 +11,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var lblTiempo: UILabel!
     @IBOutlet weak var pwTiempo: UIProgressView!
     
+    @IBOutlet weak var viewCurrentRoutine: UIView!
     @IBOutlet weak var lblRutinaActual: UILabel!
     @IBOutlet weak var btnRutinaHasta: UIButton!
     @IBOutlet weak var lblRutinaTitulo: UILabel!
@@ -25,11 +26,28 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(routineViewWasTapped))
+        viewCurrentRoutine.addGestureRecognizer(tapGesture)
+        
         actualizarCampos()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         actualizarCampos()
+    }
+    
+    @objc func routineViewWasTapped() {
+        if let currentRoutine = RutinaDAO().findCurrent() {
+            performSegue(withIdentifier: "toRoutineDetails", sender: nil)
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toRoutineDetails" {
+            let vc = segue.destination as! DetallesRutinaController
+            vc.bean = RutinaDAO().findCurrent()
+        }
     }
     
     func actualizarCampos() {

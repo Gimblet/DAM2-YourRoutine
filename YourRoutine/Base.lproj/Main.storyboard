@@ -154,6 +154,8 @@
                         <outlet property="lblTiempo" destination="M2S-Yh-xDN" id="d8j-SF-1Ns"/>
                         <outlet property="pwProgreso" destination="YYT-i5-jcI" id="Gy7-vE-DVT"/>
                         <outlet property="pwTiempo" destination="dwp-pI-phl" id="bdT-Ps-ssw"/>
+                        <outlet property="viewCurrentRoutine" destination="sJX-sr-Bx0" id="AqC-CK-mVy"/>
+                        <segue destination="1lT-a2-PB0" kind="show" identifier="toRoutineDetails" id="Gam-mO-Gyc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -1279,6 +1281,7 @@
     <inferredMetricsTieBreakers>
         <segue reference="Kqx-6f-ZUX"/>
         <segue reference="l0z-3Y-i9b"/>
+        <segue reference="Gam-mO-Gyc"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.1843137255" green="0.1529411765" blue="0.80784313730000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
     <resources>
