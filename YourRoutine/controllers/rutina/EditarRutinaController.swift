@@ -14,17 +14,16 @@ class EditarRutinaController: UIViewController,
     @IBOutlet weak var cvEtiquetas: UICollectionView!
     @IBOutlet weak var cvDias: UICollectionView!
     
-    
     @IBOutlet weak var txtTitulo: UITextField!
     @IBOutlet weak var txtDescripcion: UITextField!
     
     @IBOutlet weak var tmInicio: UIDatePicker!
     @IBOutlet weak var tmFinal: UIDatePicker!
     
+    @IBOutlet weak var slProgreso: UISlider!
+    
     var listaEtiquetas:[EtiquetaEntityModel] = []
     var listaDias:[String] = []
-    
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,6 +54,8 @@ class EditarRutinaController: UIViewController,
         tmInicio.date = convertirHora(rutina.inicio ?? "00:00")
         tmFinal.date = convertirHora(rutina.fin ?? "00:00")
         
+        slProgreso.value = rutina.progreso
+        
         // Dias seleccionados
         let dias = rutina.dia?.components(separatedBy: ",") ?? []
         RutinaDAO().setDiaTemporal(dias)
@@ -75,7 +76,6 @@ class EditarRutinaController: UIViewController,
         dateFormatter.dateFormat = "HH:mm"
         return dateFormatter.date(from: hora)!
     }
-    
     
     func iniciarRutina() -> RutinaEntity {
         let rutina = RutinaEntity(context: context)
@@ -181,6 +181,7 @@ class EditarRutinaController: UIViewController,
         rutina.dia = RutinaDAO().getDiaTemporal().joined(separator: ",")
         rutina.inicio = parsearTiempo(date: tmInicio.date)
         rutina.fin = parsearTiempo(date: tmFinal.date)
+        rutina.progreso = slProgreso.value
         
         // Limpiar etiquetas anteriores
         if let etiquetasViejas = rutina.etiqueta as? Set<EtiquetaEntity> {

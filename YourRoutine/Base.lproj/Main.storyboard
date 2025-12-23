@@ -288,6 +288,21 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Progreso" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ddh-Ll-65L">
+                                <rect key="frame" x="16" y="526" width="76" height="23"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="tintColor" red="0.1843137255" green="0.1529411765" blue="0.80784313730000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Bold" family="Apple SD Gothic Neo" pointSize="19"/>
+                                <color key="textColor" red="0.1843137255" green="0.1529411765" blue="0.80784313730000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p7B-U5-O3l">
+                                <rect key="frame" x="19" y="557" width="351" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="VyP-n2-DIW"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -299,6 +314,7 @@
                         <outlet property="lblEtiquetas" destination="WKp-KA-byM" id="8qX-Pz-wMA"/>
                         <outlet property="lblHoraFin" destination="uxi-Hm-irX" id="K2f-aC-Hb8"/>
                         <outlet property="lblHoraInicio" destination="Z07-jA-WHs" id="OVf-Sk-a4w"/>
+                        <outlet property="lblProgreso" destination="p7B-U5-O3l" id="QTd-QZ-H1L"/>
                         <outlet property="lblTitulo" destination="v5H-PE-cik" id="oVa-AI-eKj"/>
                     </connections>
                 </viewController>
@@ -553,6 +569,7 @@
                     <connections>
                         <outlet property="cvDias" destination="M0l-Ir-Y6U" id="x81-zv-T0M"/>
                         <outlet property="cvEtiquetas" destination="mSQ-WS-9fi" id="fUX-Y1-Nat"/>
+                        <outlet property="slProgreso" destination="8Pl-dF-YH5" id="2lB-YV-Uwq"/>
                         <outlet property="tmFinal" destination="wBK-4C-Hbc" id="PH5-rf-MFT"/>
                         <outlet property="tmInicio" destination="VLs-bp-R79" id="B3m-H0-J9x"/>
                         <outlet property="txtDescripcion" destination="Hia-to-S8u" id="a9l-uF-hQ7"/>
@@ -1267,7 +1284,7 @@
     <resources>
         <image name="alarm.waves.left.and.right.fill" catalog="system" width="128" height="75"/>
         <image name="gauge.with.needle.fill" catalog="system" width="128" height="123"/>
-        <image name="house.fill" catalog="system" width="128" height="104"/>
+        <image name="house.fill" catalog="system" width="32" height="32"/>
         <image name="info.circle.fill" catalog="system" width="128" height="123"/>
         <image name="lightbulb.min.fill" catalog="system" width="115" height="128"/>
         <image name="pencil.circle.fill" catalog="system" width="128" height="123"/>
@@ -1276,13 +1293,13 @@
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGroupedBackgroundColor">
-            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemPurpleColor">
-            <color red="0.68627450980392157" green="0.32156862745098042" blue="0.87058823529411766" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.68627450980000004" green="0.32156862749999998" blue="0.87058823529999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="tableCellBlueTextColor">
-            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

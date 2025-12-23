@@ -41,8 +41,10 @@ class ViewController: UIViewController {
             
             pwTiempo.observedProgress = getCurrentTime(current: currentMin, total: totalMin)
             lblTiempo.text = "\(currentMin)/\(totalMin) min"
+            lblRutinaActual.text = "Rutina Actual"
             btnRutinaHasta.setTitle(until, for: .normal)
             lblRutinaTitulo.text = currentRoutine.nombre.unsafelyUnwrapped
+            lblProgreso.isHidden = false
             lblProgreso.text = "Progreso Registrado (\(roundedProgress) %)"
             pwProgreso.observedProgress = getCurrentProgress(current: currentRoutine.progreso, total: 100)
         } else {

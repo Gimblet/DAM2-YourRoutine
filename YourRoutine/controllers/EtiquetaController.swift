@@ -9,11 +9,10 @@ import UIKit
 
 class EtiquetaController: UIViewController {
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    var rutina:NuevaRutinaController!
     
+    var rutina:NuevaRutinaController!
     var rutinaEdit:EditarRutinaController!
     
-
     @IBOutlet weak var txtEtiqueta: UITextField!
     
     override func viewDidLoad() {
@@ -22,30 +21,26 @@ class EtiquetaController: UIViewController {
     
     @IBAction func btnAgregar(_ sender: UIButton) {
         let etiqueta = EtiquetaEntity(context: context)
+        let textoEtiqueta:String = txtEtiqueta.text ?? ""
         
-        if((txtEtiqueta.text?.isEmpty) != nil) { dismiss(animated: true); return }
-        
-        etiqueta.nombre = txtEtiqueta.text
-        
-        let resultado = EtiquetaDAO().save(bean: etiqueta)
-        
-        if(resultado == -1) {
-            print("Ocurrio un error al agregar etiqueta")
+        if(textoEtiqueta.isEmpty) {
+            dismiss(animated: true); return
+        } else {
+            etiqueta.nombre = textoEtiqueta
+            let resultado = EtiquetaDAO().save(bean: etiqueta)
+            
+            if(resultado == -1) {
+                print("Ocurrio un error al agregar etiqueta")
+            }
         }
         
-        /*rutina.listadoEtiquetas()
-        rutina.cvEtiquetas.reloadData()
-        
-        rutinaEdit.listadoEtiquetas()
-        rutinaEdit.cvEtiquetas.reloadData()*/
-        
         // Si viene de NuevaRutina
-            rutina?.listadoEtiquetas()
-            rutina?.cvEtiquetas.reloadData()
-
-            // Si viene de EditarRutina
-            rutinaEdit?.listadoEtiquetas()
-            rutinaEdit?.cvEtiquetas.reloadData()
+        rutina?.listadoEtiquetas()
+        rutina?.cvEtiquetas.reloadData()
+        
+        // Si viene de EditarRutina
+        rutinaEdit?.listadoEtiquetas()
+        rutinaEdit?.cvEtiquetas.reloadData()
         
         dismiss(animated: true)
     }
