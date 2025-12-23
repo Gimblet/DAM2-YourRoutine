@@ -10,4 +10,5 @@ import UIKit
 protocol IEtiquetaMetodos {
     func save(bean:EtiquetaEntity) -> Int
     func findAll() -> [EtiquetaEntity]
+    func removeByEtiqueta(bean:EtiquetaEntity) -> Int
 }

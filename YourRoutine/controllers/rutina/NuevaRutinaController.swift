@@ -151,8 +151,24 @@ class NuevaRutinaController: UIViewController,
         else  {
             let fila = cvEtiquetas.dequeueReusableCell(withReuseIdentifier: "etiquetasIdentifier", for: indexPath) as! EtiquetaCell
             fila.btnEtiqueta.setTitle(listaEtiquetas[indexPath.row].nombre, for: .normal)
+            let etiquetas = EtiquetaDAO().findAll()
+            fila.longPressActionVar = { [weak self] in
+                let text = "Esta segur@ que quiere eliminar esta etiqueta?. Esta accion es irreversible..."
+                self?.ventanaEliminar(msj: text, entity: etiquetas[indexPath.row])
+            }
             return fila
         }
+    }
+    
+    func ventanaEliminar(msj:String, entity:EtiquetaEntity) {
+        let alert=UIAlertController(title: "Sistema", message: msj, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Eliminar", style: .destructive, handler: { h in
+            EtiquetaDAO().removeByEtiqueta(bean: entity)
+            self.listadoEtiquetas()
+            self.cvEtiquetas.reloadData()
+        }))
+        alert.addAction(UIAlertAction(title: "Cancelar", style: .cancel))
+        present(alert, animated: true)
     }
     
     @IBAction func btnRegresar(_ sender: UIButton) {

@@ -22,6 +22,19 @@ class EtiquetaDAO: IEtiquetaMetodos {
         return salida
     }
     
+    func removeByEtiqueta(bean:EtiquetaEntity) -> Int {
+        var salida = -1
+        do{
+            context.delete(bean)
+            try context.save()
+            salida = 1
+        }
+        catch let x as NSError{
+            print(x.localizedDescription)
+        }
+        return salida
+    }
+    
     func findAll() -> [EtiquetaEntity] {
         var lista: [EtiquetaEntity] = []
         //PASO 1: crear objeto de la clase AppDelegate

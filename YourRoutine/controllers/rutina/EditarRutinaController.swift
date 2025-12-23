@@ -183,12 +183,12 @@ class EditarRutinaController: UIViewController,
         rutina.fin = parsearTiempo(date: tmFinal.date)
         rutina.progreso = slProgreso.value
         
-        // Limpiar etiquetas anteriores
-        if let etiquetasViejas = rutina.etiqueta as? Set<EtiquetaEntity> {
-            for e in etiquetasViejas {
-                context.delete(e)
-            }
-        }
+//        // Limpiar etiquetas anteriores
+//        if let etiquetasViejas = rutina.etiqueta as? Set<EtiquetaEntity> {
+//            for e in etiquetasViejas {
+//                context.delete(e)
+//            }
+//        }
         
         // Nuevas etiquetas
         for nombre in EtiquetaDAO().getEtiquetaTemporal() {
