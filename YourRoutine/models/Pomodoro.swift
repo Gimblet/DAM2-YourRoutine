@@ -6,9 +6,10 @@
 //
 
 import UIKit
+import FirebaseFirestore
 
-struct Pomodoro {
-    let id: String
+struct Pomodoro : Codable {
+    @DocumentID var id: String?
     let date: Date
     let time: Int
 }
