@@ -8,12 +8,8 @@
 import UIKit
 
 class PomodoroCell: UITableViewCell {
-
-    
-    @IBOutlet weak var dia: UILabel!
-    @IBOutlet weak var tiempo: UILabel!
-    
-    
+    @IBOutlet weak var lblFecha: UILabel!
+    @IBOutlet weak var lblTiempo: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

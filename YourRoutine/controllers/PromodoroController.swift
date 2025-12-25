@@ -9,6 +9,7 @@ class PromodoroController: UIViewController,
     @IBOutlet weak var TimerLabel: UILabel!
     @IBOutlet weak var startStopButton: UIButton!
     @IBOutlet weak var resetButton: UIButton!
+    @IBOutlet weak var tvPomodoro: UITableView!
     
     var pomodoros: [Pomodoro] = []
     
@@ -22,11 +23,11 @@ class PromodoroController: UIViewController,
         super.viewDidLoad()
         
         setTimeLabel(remainingSeconds)
-        tableView.layer.cornerRadius = 20
-        tableView.clipsToBounds = true
+        tvPomodoro.layer.cornerRadius = 20
+        tvPomodoro.clipsToBounds = true
         
-        tableView.dataSource = self
-        tableView.delegate = self
+        tvPomodoro.dataSource = self
+        tvPomodoro.delegate = self
         
         fetchPomodoros()
     }
@@ -59,7 +60,7 @@ class PromodoroController: UIViewController,
         )
         
         timerCounting = true
-        startStopButton.setTitle("STOP", for: .normal)
+        startStopButton.setTitle("PARAR", for: .normal)
         startStopButton.setTitleColor(.red, for: .normal)
     }
     
@@ -80,7 +81,7 @@ class PromodoroController: UIViewController,
         scheduledTimer?.invalidate()
         timerCounting = false
         
-        startStopButton.setTitle("START", for: .normal)
+        startStopButton.setTitle("INICIAR", for: .normal)
         startStopButton.setTitleColor(.systemGreen, for: .normal)
     }
     
@@ -107,7 +108,7 @@ class PromodoroController: UIViewController,
     
     @IBAction func saveTimeAction(_ sender: Any) {
         guard remainingSeconds == 0 else {
-            print("⏳ El Pomodoro aún no ha terminado")
+            ventana(msj: "Debe Terminar el pomodoro para poder guardarlo")
             return
         }
         
@@ -134,6 +135,9 @@ class PromodoroController: UIViewController,
         database.collectionGroup("pomodoro")
             .addSnapshotListener { (data, error) in
                 guard let documentos = data?.documents else { return }
+                
+                self.pomodoros.removeAll()
+                
                 for e in documentos {
                     let result = e.data()
                     let fbDate = result["date"] as? Timestamp
@@ -143,6 +147,8 @@ class PromodoroController: UIViewController,
                     let pomodoro = Pomodoro(date: date ?? Date(), time: time)
                     self.pomodoros.append(pomodoro)
                 }
+                
+                DispatchQueue.main.async { self.tvPomodoro.reloadData() }
             }
     }
     
@@ -160,16 +166,19 @@ class PromodoroController: UIViewController,
         
         let pomodoro = pomodoros[indexPath.row]
         
-        let formatter = DateFormatter()
-        formatter.dateStyle = .medium
-        formatter.timeStyle = .short
-        
-        cell.dia.text = formatter.string(from: pomodoro.date)
-        cell.tiempo.text = "\(pomodoro.time) min"
+        cell.lblFecha.text = "Fecha: " + pomodoro.date.formatted()
+        cell.lblTiempo.text = "Tiempo: \(String(pomodoro.time)) min"
         
         return cell
     }
     
-    @IBOutlet weak var tableView: UITableView!
-    
+    func ventana(msj:String) {
+        // crear ventana de alerta
+        let alert=UIAlertController(title: "Sistema", message: msj, preferredStyle: .alert)
+        //adicionar boton al objeto alert
+        alert.addAction(UIAlertAction(title: "Aceptar", style: .default))
+        //mostrar el objeto "alert"
+        present(alert, animated: true)
+    }
+
 }
