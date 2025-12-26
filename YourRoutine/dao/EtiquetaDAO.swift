@@ -87,6 +87,7 @@ class EtiquetaDAO: IEtiquetaMetodos {
             }
             i = i + 1;
         }
+        UserDefaults.standard.set(previousData, forKey: "etiquetas")
     }
     
     func clearTemporal() {

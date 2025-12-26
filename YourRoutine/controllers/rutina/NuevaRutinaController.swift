@@ -30,6 +30,9 @@ class NuevaRutinaController: UIViewController,
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        RutinaDAO().clearTemporal()
+        EtiquetaDAO().clearTemporal()
+
         iniciarViewCollection()
         listadoDias()
         listadoEtiquetas()
@@ -57,10 +60,10 @@ class NuevaRutinaController: UIViewController,
         let rutina = iniciarRutina()
         let etiquetas = iniciarEtiquetas()
         
-        let estado = RutinaDAO().save(bean: rutina, etiquetas: etiquetas)
-        
         RutinaDAO().clearTemporal()
         EtiquetaDAO().clearTemporal()
+        
+        let estado = RutinaDAO().save(bean: rutina, etiquetas: etiquetas)
         
         // validar estado
         if (estado == 1) {
@@ -173,6 +176,7 @@ class NuevaRutinaController: UIViewController,
     
     @IBAction func btnRegresar(_ sender: UIButton) {
         EtiquetaDAO().clearTemporal()
+        RutinaDAO().clearTemporal()
         dismiss(animated: true)
     }
     

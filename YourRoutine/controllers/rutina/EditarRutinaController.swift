@@ -28,6 +28,9 @@ class EditarRutinaController: UIViewController,
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        RutinaDAO().clearTemporal()
+        EtiquetaDAO().clearTemporal()
+        
         guard rutina != nil else {
             print("editarRutina")
             dismiss(animated: true)
@@ -182,6 +185,9 @@ class EditarRutinaController: UIViewController,
                     cell.btnEtiqueta.setTitleColor(UIColor.white, for: .selected)
                 }
             }
+            if(cell.btnEtiqueta.isSelected == false) {
+                EtiquetaDAO().removeEtiquetaTemporal(etiqueta: cell.btnEtiqueta.currentTitle!)
+            }
 
             return cell
         }
@@ -211,17 +217,24 @@ class EditarRutinaController: UIViewController,
         rutina.fin = parsearTiempo(date: tmFinal.date)
         rutina.progreso = slProgreso.value
         
+        // Eliminar Anteriores Etiquetas    
+        RutinaDAO().deleteAllEtiquetasByRoutine(bean: rutina)
+        
         // Nuevas etiquetas
         for nombre in EtiquetaDAO().getEtiquetaTemporal() {
             let etiqueta = EtiquetaEntity(context: context)
             etiqueta.nombre = nombre
-            etiqueta.rutina = rutina
+            rutina.addToEtiqueta(etiqueta)
         }
         
         do {
             try context.save()
+            RutinaDAO().clearTemporal()
+            EtiquetaDAO().clearTemporal()
             ventanaConAccion(msj: "Rutina actualizada con éxito")
         } catch {
+            RutinaDAO().clearTemporal()
+            EtiquetaDAO().clearTemporal()
             ventana(msj: "Error al actualizar la rutina")
         }
     }

@@ -13,4 +13,5 @@ protocol IRutinaMetodos {
     func findAll() -> [RutinaEntity]
     func update(bean:RutinaEntity) -> Int
     func delete(bean:RutinaEntity) -> Int
+    func deleteAllEtiquetasByRoutine(bean: RutinaEntity)
 }

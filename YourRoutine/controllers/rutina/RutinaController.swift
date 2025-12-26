@@ -14,6 +14,9 @@ class RutinaController: UIViewController,
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        RutinaDAO().clearTemporal()
+        EtiquetaDAO().clearTemporal()
+        
         lista=RutinaDAO().findAll()
         tablaRutinas.dataSource=self
         tablaRutinas.delegate=self
@@ -72,6 +75,7 @@ class RutinaController: UIViewController,
             
             if (etiquetasArray.isEmpty) {
                 fila.lblEtiqueta.text = "Sin Etiquetas"
+                fila.lblEtiquetaExtra.isHidden = true
             } else {
                 if(etiquetasArray.count > 1) {
                     fila.lblEtiquetaExtra.isHidden = false

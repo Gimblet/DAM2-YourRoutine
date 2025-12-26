@@ -22,6 +22,15 @@ class RutinaDAO : IRutinaMetodos {
         return salida
     }
     
+    func deleteAllEtiquetasByRoutine(bean: RutinaEntity) {
+        do {
+            bean.removeFromEtiqueta(bean.etiqueta ?? [])
+            try context.save()
+        }  catch let x as NSError{
+            print(x.localizedDescription)
+        }
+    }
+    
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     func save(bean: RutinaEntity, etiquetas: [EtiquetaEntity]) -> Int {
