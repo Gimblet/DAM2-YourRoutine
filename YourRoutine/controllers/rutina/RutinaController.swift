@@ -26,7 +26,11 @@ class RutinaController: UIViewController,
     }
     
     @IBAction func btnDetallesRutina(_ sender: UIButton) {
-        performSegue(withIdentifier: "detalleRutina", sender: nil)
+        if tablaRutinas.indexPathForSelectedRow != nil {
+            performSegue(withIdentifier: "detalleRutina", sender: nil)
+        } else {
+            print("Se debe seleccionar una rutina primero")
+        }
     }
     
     @IBAction func btnNuevaRutina(_ sender: UIButton) {
