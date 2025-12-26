@@ -121,6 +121,7 @@ class PromodoroController: UIViewController,
                         "date": Date(),
                         "time": 25
                     ])
+                self.setTimeLabel(pomodoroSeconds)
                 self.fetchPomodoros()
                 
             } catch {
@@ -133,6 +134,7 @@ class PromodoroController: UIViewController,
         let database = Firestore.firestore()
         
         database.collectionGroup("pomodoro")
+            .order(by: "date", descending: true)
             .addSnapshotListener { (data, error) in
                 guard let documentos = data?.documents else { return }
                 
