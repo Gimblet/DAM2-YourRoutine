@@ -64,7 +64,7 @@ class NuevaRutinaController: UIViewController,
         
         // validar estado
         if (estado == 1) {
-            ventana(msj: "Rutina registrada con Exito")
+            ventanaConAccion(msj: "Rutina registrada con Exito")
         }
         else {
             ventana(msj: "Error al intentar registrar Rutina")
@@ -193,6 +193,17 @@ class NuevaRutinaController: UIViewController,
         let alert=UIAlertController(title: "Sistema", message: msj, preferredStyle: .alert)
         //adicionar boton al objeto alert
         alert.addAction(UIAlertAction(title: "Aceptar", style: .default))
+        //mostrar el objeto "alert"
+        present(alert, animated: true)
+    }
+    
+    func ventanaConAccion(msj:String) {
+        // crear ventana de alerta
+        let alert=UIAlertController(title: "Sistema", message: msj, preferredStyle: .alert)
+        //adicionar boton al objeto alert
+        alert.addAction(UIAlertAction(title: "Aceptar", style: .default, handler: { h in
+            self.dismiss(animated: true)
+        }))
         //mostrar el objeto "alert"
         present(alert, animated: true)
     }

@@ -212,8 +212,7 @@ class EditarRutinaController: UIViewController,
         
         do {
             try context.save()
-            ventana(msj: "Rutina actualizada con éxito")
-            dismiss(animated: true)
+            ventanaConAccion(msj: "Rutina actualizada con éxito")
         } catch {
             ventana(msj: "Error al actualizar la rutina")
         }
@@ -230,6 +229,17 @@ class EditarRutinaController: UIViewController,
         let alert=UIAlertController(title: "Sistema", message: msj, preferredStyle: .alert)
         //adicionar boton al objeto alert
         alert.addAction(UIAlertAction(title: "Aceptar", style: .default))
+        //mostrar el objeto "alert"
+        present(alert, animated: true)
+    }
+    
+    func ventanaConAccion(msj:String) {
+        // crear ventana de alerta
+        let alert=UIAlertController(title: "Sistema", message: msj, preferredStyle: .alert)
+        //adicionar boton al objeto alert
+        alert.addAction(UIAlertAction(title: "Aceptar", style: .default, handler: { h in
+            self.dismiss(animated: true)
+        }))
         //mostrar el objeto "alert"
         present(alert, animated: true)
     }
