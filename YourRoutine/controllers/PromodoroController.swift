@@ -3,11 +3,11 @@ import UIKit
 import FirebaseFirestore
 
 class PromodoroController: UIViewController,
-                            UITableViewDataSource,
-                            UITableViewDelegate,
+                           UITableViewDataSource,
+                           UITableViewDelegate,
                            UIPickerViewDataSource,
                            UIPickerViewDelegate{
-
+    
     @IBOutlet weak var TimerLabel: UILabel!
     @IBOutlet weak var startStopButton: UIButton!
     @IBOutlet weak var resetButton: UIButton!
@@ -216,5 +216,5 @@ class PromodoroController: UIViewController,
         //mostrar el objeto "alert"
         present(alert, animated: true)
     }
-
+    
 }
