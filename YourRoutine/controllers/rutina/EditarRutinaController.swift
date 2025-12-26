@@ -47,6 +47,11 @@ class EditarRutinaController: UIViewController,
         cargarDatosRutina()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        listadoDias()
+        listadoEtiquetas()
+    }
+    
     func cargarDatosRutina() {
         txtTitulo.text = rutina.nombre
         txtDescripcion.text = rutina.descripcion
@@ -164,10 +169,25 @@ class EditarRutinaController: UIViewController,
                 withReuseIdentifier: "etiquetasIdentifier",
                 for: indexPath
             ) as! EtiquetaCell
-            
+            let etiquetas = EtiquetaDAO().findAll()
+            cell.longPressActionVar = { [weak self] in
+                let text = "Esta segur@ que quiere eliminar esta etiqueta?. Esta accion es irreversible..."
+                self?.ventanaEliminar(msj: text, entity: etiquetas[indexPath.row])
+            }
             cell.btnEtiqueta.setTitle(listaEtiquetas[indexPath.row].nombre, for: .normal)
             return cell
         }
+    }
+    
+    func ventanaEliminar(msj:String, entity:EtiquetaEntity) {
+        let alert=UIAlertController(title: "Sistema", message: msj, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Eliminar", style: .destructive, handler: { h in
+            EtiquetaDAO().removeByEtiqueta(bean: entity)
+            self.listadoEtiquetas()
+            self.cvEtiquetas.reloadData()
+        }))
+        alert.addAction(UIAlertAction(title: "Cancelar", style: .cancel))
+        present(alert, animated: true)
     }
     
     @IBAction func btnEditar(_ sender: UIButton) {
@@ -182,13 +202,6 @@ class EditarRutinaController: UIViewController,
         rutina.inicio = parsearTiempo(date: tmInicio.date)
         rutina.fin = parsearTiempo(date: tmFinal.date)
         rutina.progreso = slProgreso.value
-        
-//        // Limpiar etiquetas anteriores
-//        if let etiquetasViejas = rutina.etiqueta as? Set<EtiquetaEntity> {
-//            for e in etiquetasViejas {
-//                context.delete(e)
-//            }
-//        }
         
         // Nuevas etiquetas
         for nombre in EtiquetaDAO().getEtiquetaTemporal() {
@@ -223,6 +236,14 @@ class EditarRutinaController: UIViewController,
     
     @IBAction func btnEtiqueta(_ sender: UIButton) {
         performSegue(withIdentifier: "nuevaEtiquetaIdentifier", sender: nil)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "nuevaEtiquetaIdentifier" {
+            if let obj = segue.destination as? EtiquetaController {
+                obj.rutinaEdit = self
+            }
+        }
     }
     
     func validarFormulario() -> Bool {
