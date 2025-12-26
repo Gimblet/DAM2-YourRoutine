@@ -170,11 +170,19 @@ class EditarRutinaController: UIViewController,
                 for: indexPath
             ) as! EtiquetaCell
             let etiquetas = EtiquetaDAO().findAll()
+            let etiquetasPrevias = EtiquetaDAO().getEtiquetaTemporal()
             cell.longPressActionVar = { [weak self] in
                 let text = "Esta segur@ que quiere eliminar esta etiqueta?. Esta accion es irreversible..."
                 self?.ventanaEliminar(msj: text, entity: etiquetas[indexPath.row])
             }
             cell.btnEtiqueta.setTitle(listaEtiquetas[indexPath.row].nombre, for: .normal)
+            for b in etiquetasPrevias {
+                if(b == cell.btnEtiqueta.currentTitle) {
+                    cell.btnEtiqueta.isSelected = true
+                    cell.btnEtiqueta.setTitleColor(UIColor.white, for: .selected)
+                }
+            }
+
             return cell
         }
     }

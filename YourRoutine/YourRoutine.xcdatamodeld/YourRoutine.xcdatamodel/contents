@@ -9,11 +9,6 @@
             </uniquenessConstraint>
         </uniquenessConstraints>
     </entity>
-    <entity name="PomodoroEntity" representedClassName="PomodoroEntity" syncable="YES" codeGenerationType="class">
-        <attribute name="estaCorriendo" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
-        <attribute name="horaFin" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="horaInicio" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-    </entity>
     <entity name="RutinaEntity" representedClassName="RutinaEntity" syncable="YES" codeGenerationType="class">
         <attribute name="descripcion" optional="YES" attributeType="String"/>
         <attribute name="dia" optional="YES" attributeType="String"/>
