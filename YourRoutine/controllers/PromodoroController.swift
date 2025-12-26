@@ -4,17 +4,25 @@ import FirebaseFirestore
 
 class PromodoroController: UIViewController,
                             UITableViewDataSource,
-                            UITableViewDelegate {
-    
+                            UITableViewDelegate,
+                           UIPickerViewDataSource,
+                           UIPickerViewDelegate{
+
     @IBOutlet weak var TimerLabel: UILabel!
     @IBOutlet weak var startStopButton: UIButton!
     @IBOutlet weak var resetButton: UIButton!
     @IBOutlet weak var tvPomodoro: UITableView!
     
-    var pomodoros: [Pomodoro] = []
+    @IBOutlet weak var pickerPomodoroTime: UIPickerView!
     
-    let pomodoroSeconds = 60 // 1 minuto
-    var remainingSeconds = 60
+    var pomodoros: [Pomodoro] = []
+    var ciclosPomodoro:[String] = [
+        "Ciclo estandar 25/5",
+        "Ciclo de prueba 1/1"
+    ]
+    
+    var pomodoroSeconds = 1500 // 25 minutes
+    var remainingSeconds = 1500 // 25 minutes
     
     var timerCounting = false
     var scheduledTimer: Timer?
@@ -26,18 +34,43 @@ class PromodoroController: UIViewController,
         tvPomodoro.layer.cornerRadius = 20
         tvPomodoro.clipsToBounds = true
         
+        pickerPomodoroTime.dataSource = self
+        pickerPomodoroTime.delegate = self
+        
         tvPomodoro.dataSource = self
         tvPomodoro.delegate = self
         
         fetchPomodoros()
     }
     
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        ciclosPomodoro.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        if(row == 0 && timerCounting == false) {
+            pomodoroSeconds = 1500
+            remainingSeconds = 1500
+            setTimeLabel(1500)
+        } else if(row == 1 && timerCounting == false) {
+            setTimeLabel(60)
+            pomodoroSeconds = 60
+            remainingSeconds = 60
+        }
+        return ciclosPomodoro[row]
+    }
     
     @IBAction func startStopAction(_ sender: Any) {
         if timerCounting {
             stopTimer()
+            pickerPomodoroTime.isUserInteractionEnabled = true
         } else {
             startTimer()
+            pickerPomodoroTime.isUserInteractionEnabled = false
         }
     }
     
@@ -119,9 +152,10 @@ class PromodoroController: UIViewController,
                 try await database.collection("pomodoro")
                     .addDocument(data: [
                         "date": Date(),
-                        "time": 25
+                        "time": pomodoroSeconds / 60
                     ])
                 self.setTimeLabel(pomodoroSeconds)
+                self.pickerPomodoroTime.isUserInteractionEnabled = true
                 self.fetchPomodoros()
                 
             } catch {
